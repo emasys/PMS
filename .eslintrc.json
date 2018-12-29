@@ -1,0 +1,46 @@
+{
+    "parser": "babel-eslint",
+    "extends": [
+        "airbnb",
+        "plugin:flowtype/recommended"
+    ],
+    "plugins": [
+        "react",
+        "jsx-a11y",
+        "flowtype",
+        "import"
+    ],
+    "globals": {
+        "document": true,
+        "M": true,
+        "test": true,
+        "expect": true,
+        "describe": true,
+        "localStorage": true,
+        "jest": true,
+        "beforeEach": true
+    },
+    "rules": {
+        "flowtype/require-return-type": [
+            "error",
+            "always",
+            {
+                "excludeMatching": [
+                    "render"
+                ]
+            }
+        ],
+        "max-len": [
+            "error",
+            {
+                "code": 80,
+                "ignoreStrings": true
+            }
+        ]
+    },
+    "settings": {
+        "flowtype": {
+            "onlyFilesWithFlowAnnotation": true
+        }
+    }
+}
