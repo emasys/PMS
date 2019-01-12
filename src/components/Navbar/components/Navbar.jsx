@@ -1,13 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Headroom from 'react-headroom';
 
 const Navbar = () => (
   <Headroom>
     <nav className="navbar navbar-expand-lg navbar-dark bg-greyish">
-      <a className="navbar-brand" href="#">
+      <Link to="/" className="navbar-brand">
         popdify
-      </a>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -29,9 +30,9 @@ const Navbar = () => (
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <Link to="/locations" className="nav-link">
               view your locations
-            </a>
+            </Link>
           </li>
         </ul>
         <form className="form-inline my-2 my-lg-0 col-8 justify-content-end">

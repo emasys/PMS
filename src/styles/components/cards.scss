@@ -1,0 +1,42 @@
+.location-card {
+  align-items: center;
+  background: linear-gradient(180deg, rgba(255, 255, 255,1), rgba(255, 255, 255,.97), rgba(255, 255, 255, .97)), url('../images/compass-146166_640.png') no-repeat center center;
+  background-size: cover;
+  border-radius: 1rem;
+  box-shadow: $box-shadow;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 15rem;
+  overflow: hidden;
+
+  &:hover > .location-card-footer {
+    top: 0;
+  }
+
+  .btn-sm {
+    height: 1rem;
+  }
+}
+
+.divider {
+  background: $dark-grey;
+  border-radius: 10rem;
+  height: .3rem;
+  margin-bottom: 1rem;
+  width: 2rem;
+}
+
+.location-card-footer {
+  // height: 100%;
+  font-size: 60%;
+  position: relative;
+  top: 100%;
+  transition: .3s ease-out;
+  width: 100%;
+
+  a {
+    color: $grey;
+    font-style: italic;
+  }
+}

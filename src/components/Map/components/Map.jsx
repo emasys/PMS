@@ -51,7 +51,6 @@ export default class Map extends React.Component<*, State> {
 
   renderPopup() {
     const { popupInfo } = this.state;
-    console.log(popupInfo);
     return (
       popupInfo && (
         <Popup
