@@ -2,7 +2,10 @@
 // @flow
 
 import * as React from 'react';
-import MapGL from 'react-map-gl';
+import MapGL, { Marker, Popup } from 'react-map-gl';
+import Pin from './Pin';
+import CityInfo from './CityInfo';
+import mock from '../../../mock.json';
 
 type State = {
   viewport: {
@@ -28,38 +31,58 @@ export default class Map extends React.Component<*, State> {
         bearing: 0,
         pitch: 0,
         height: 600,
-        width: 400,
+        width: '100vw',
       },
     };
   }
 
-  componentDidMount() {
-    this.setState({
-      viewport: {
-        latitude: 6.465422,
-        longitude: 3.406448,
-        zoom: 8,
-        height: this.mapWidgetElement.clientHeight,
-        width: this.mapWidgetElement.clientWidth,
-      },
-    });
+  renderMarker = (city, index) => (
+    <Marker
+      key={`marker-${index}`}
+      longitude={city.longitude}
+      latitude={city.latitude}
+    >
+      <Pin
+        size={20}
+        onClick={(): Function => this.setState({ popupInfo: city })}
+      />
+    </Marker>
+  );
+
+  renderPopup() {
+    const { popupInfo } = this.state;
+    console.log(popupInfo);
+    return (
+      popupInfo && (
+        <Popup
+          tipSize={5}
+          anchor="top"
+          longitude={popupInfo.longitude}
+          latitude={popupInfo.latitude}
+          closeOnClick={false}
+          // eslint-disable-next-line flowtype/require-return-type
+          onClose={() => this.setState({ popupInfo: null })}
+        >
+          <CityInfo info={popupInfo} />
+        </Popup>
+      )
+    );
   }
 
   render() {
     const { viewport } = this.state;
     return (
-      <div
-        className="map-wrapper"
-        // eslint-disable-next-line flowtype/require-return-type
-        ref={mapWidgetElement => (this.mapWidgetElement = mapWidgetElement)}
-      >
+      <div className="map-wrapper">
         <MapGL
           {...viewport}
           mapStyle="mapbox://styles/mapbox/dark-v9"
           mapboxApiAccessToken={TOKEN}
           // eslint-disable-next-line no-shadow
           onViewportChange={(viewport): Function => this.setState({ viewport })}
-        />
+        >
+          {mock.map(this.renderMarker)}
+          {this.renderPopup()}
+        </MapGL>
       </div>
     );
   }
